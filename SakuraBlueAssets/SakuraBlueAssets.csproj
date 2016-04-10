@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81E7A0FE-4EA6-42A3-B7E1-BD4667A58269}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SakuraBlueAssets</RootNamespace>
+    <AssemblyName>SakuraBlueAssets</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Agent\Class\GamblerClass.cs" />
+    <Compile Include="Entities\Agent\Class\MageClass.cs" />
+    <Compile Include="Entities\Agent\Class\WarriorClass.cs" />
+    <Compile Include="Entities\Agent\Player.cs" />
+    <Compile Include="Entities\Agent\Stats\AwarenessStat.cs" />
+    <Compile Include="Entities\Agent\Stats\ChaosStat.cs" />
+    <Compile Include="Entities\Agent\Stats\ConstituionStat.cs" />
+    <Compile Include="Entities\Agent\Stats\DarkStat.cs" />
+    <Compile Include="Entities\Agent\Stats\DexterityStat.cs" />
+    <Compile Include="Entities\Agent\Stats\EarthStat.cs" />
+    <Compile Include="Entities\Agent\Stats\FireStat.cs" />
+    <Compile Include="Entities\Agent\Stats\HealthPointsStat.cs" />
+    <Compile Include="Entities\Agent\Stats\LightStat.cs" />
+    <Compile Include="Entities\Agent\Stats\OrderStat.cs" />
+    <Compile Include="Entities\Agent\Stats\StaminaStat.cs" />
+    <Compile Include="Entities\Agent\Stats\StatAssetBase.cs" />
+    <Compile Include="Entities\Agent\Stats\StealthStat.cs" />
+    <Compile Include="Entities\Agent\Stats\StrenghtStat.cs" />
+    <Compile Include="Entities\Agent\Stats\WaterStat.cs" />
+    <Compile Include="Entities\Agent\Stats\WindStat.cs" />
+    <Compile Include="Entities\Items\Weapons\BroadSword.cs" />
+    <Compile Include="Entities\Items\Weapons\Dagger.cs" />
+    <Compile Include="Entities\Items\Weapons\LongSword.cs" />
+    <Compile Include="Entities\Items\Weapons\Mahjongbow.cs" />
+    <Compile Include="Entities\Items\Weapons\Mahjong\Direction.cs" />
+    <Compile Include="Entities\Items\Weapons\Mahjong\MahjongAmmoBag.cs" />
+    <Compile Include="Entities\Items\Weapons\Mahjong\Tile.cs" />
+    <Compile Include="Entities\Items\Weapons\ShortSword.cs" />
+    <Compile Include="Entities\Items\Weapons\Staff.cs" />
+    <Compile Include="Entities\Agent\NPCBase.cs" />
+    <Compile Include="Entities\Agent\Renderable.cs" />
+    <Compile Include="Entities\Tiles\Bridge.cs" />
+    <Compile Include="Entities\Tiles\Forest.cs" />
+    <Compile Include="Entities\Tiles\Grass.cs" />
+    <Compile Include="Entities\Tiles\Sand.cs" />
+    <Compile Include="Entities\Tiles\WallDark.cs" />
+    <Compile Include="Entities\Tiles\WallLight.cs" />
+    <Compile Include="Entities\Tiles\Water.cs" />
+    <Compile Include="Music\Music.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\Agent\Race\Djin.cs" />
+    <Compile Include="Entities\Agent\Race\Human.cs" />
+    <Compile Include="Entities\Agent\Race\Narugan.cs" />
+    <Compile Include="Entities\Agent\Race\XiongMao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\BG\bg01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Enemy\femaleDjin01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\map1.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Music\Battle with the Circus Freaks.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Music\Good Night.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Music\ogg\info.txt" />
+    <Content Include="Music\Stratosphere.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Music\info.txt" />
+    <Content Include="License.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Music\ogg\JRPG_battleBoss_loop.ogg" />
+    <None Include="Music\ogg\JRPG_battleFinal.ogg" />
+    <None Include="Music\ogg\JRPG_characterRevived.ogg" />
+    <None Include="Music\ogg\JRPG_discovery.ogg" />
+    <None Include="Music\ogg\JRPG_docks_loop.ogg" />
+    <None Include="Music\ogg\JRPG_inn_loop.ogg" />
+    <None Include="Music\ogg\JRPG_joinParty.ogg" />
+    <None Include="Music\ogg\JRPG_levelUp.ogg" />
+    <None Include="Music\ogg\JRPG_machineRoom_loop.ogg" />
+    <None Include="Music\ogg\JRPG_mysticIsle.ogg" />
+    <None Include="Music\ogg\JRPG_shop_loop.ogg" />
+    <None Include="Music\ogg\JRPG_tavern.ogg" />
+    <None Include="Music\ogg\JRPG_winBattleBoss.ogg" />
+    <None Include="Music\ogg\JRPG_winBattleFinal.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lock\AccessDenied.csproj">
+      <Project>{f827e093-ab87-4493-aa82-8d084bc879c2}</Project>
+      <Name>AccessDenied</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omnicatz.Helper\Omnicatz.Helper.csproj">
+      <Project>{2c50e7f0-5827-45f8-87ca-49d55191c87d}</Project>
+      <Name>Omnicatz.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SakuraBlueAbstractAndBase\SakuraBlueAbstractAndBase.csproj">
+      <Project>{05a1766c-ab2d-467f-a7e2-8e35c1a46d7c}</Project>
+      <Name>SakuraBlueAbstractAndBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Agent\Abilities\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D53F5472-4A8C-4FA2-91C3-73F522A5B143}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SakuraBlue</RootNamespace>
+    <AssemblyName>SakuraBlue</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Agent\AI\HostileAI.cs" />
+    <Compile Include="GameState\BattleState\BattleManager.cs" />
+    <Compile Include="GameState\BattleState\BattleState.cs" />
+    <Compile Include="GameState\Map.cs" />
+    <Compile Include="GameState\Menu\ClassChoice.cs" />
+    <Compile Include="GameState\Menu\GameMenuBaseState.cs" />
+    <Compile Include="GameState\Menu\GenderChoice.cs" />
+    <Compile Include="GameState\Menu\NewGame.cs" />
+    <Compile Include="GameState\Menu\Options.cs" />
+    <Compile Include="GameState\Menu\RaceChoice.cs" />
+    <Compile Include="GameState\Menu\TopMenu.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lock\AccessDenied.csproj">
+      <Project>{f827e093-ab87-4493-aa82-8d084bc879c2}</Project>
+      <Name>AccessDenied</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omnicatz.Helper\Omnicatz.Helper.csproj">
+      <Project>{2c50e7f0-5827-45f8-87ca-49d55191c87d}</Project>
+      <Name>Omnicatz.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SakuraBlueAbstractAndBase\SakuraBlueAbstractAndBase.csproj">
+      <Project>{05a1766c-ab2d-467f-a7e2-8e35c1a46d7c}</Project>
+      <Name>SakuraBlueAbstractAndBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SakuraBlueAssets\SakuraBlueAssets.csproj">
+      <Project>{81e7a0fe-4ea6-42a3-b7e1-bd4667a58269}</Project>
+      <Name>SakuraBlueAssets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

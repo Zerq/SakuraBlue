@@ -1,0 +1,7 @@
+﻿© Copyright 2016 Karl Axel Lindström 
+
+You may only utilize this project as an example.
+this is the assets for my game and frankly if your gonna make a game make your own :p
+it's not all that hard all the abstract classes should be in their own project which will be under a open source license.
+
+You free to play the game and use this as a example to test and get to grips with the strukture and how to implement your own game.

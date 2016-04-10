@@ -1,0 +1,39 @@
+
+Water <--> Fire
+dex vs str
+
+
+Wind <--> Earth
+agil vs con
+//agi + str = spd thus speed is unessesery
+
+
+Chaos <--> Order
+More dmg output less defence vs greater chance of first strike and regular defence and damage output & more chanse of stealth kill
+
+Dark <--> Light
+stealth vs awarness
+
+
+chaos-->water
+
+water-->dark
+
+dark-->wind
+wind-->order
+order-->fire
+fire-->light
+light-->earth
+earth-->chaos
+
+//Demonic alignment
+earth+dark+fire+chaos
+
+//angelic alignment
+order+water+light+wind
+
+//technological alignment
+fire+chaos+wind+light
+
+//Natural alignment
+dark+earth+order+water

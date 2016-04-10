@@ -1,0 +1,3 @@
+﻿© Copyright 2016 Karl Axel Lindström 
+The SakuraBlueAbstractAndBase project is licensed under LGPL-3.0 license https://opensource.org/licenses/LGPL-3.0
+

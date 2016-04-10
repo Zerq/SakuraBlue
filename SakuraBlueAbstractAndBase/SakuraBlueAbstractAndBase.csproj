@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{05A1766C-AB2D-467F-A7E2-8E35C1A46D7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SakuraBlueAbstractAndBase</RootNamespace>
+    <AssemblyName>SakuraBlueAbstractAndBase</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <HintPath>..\packages\ncalc.1.3.8\lib\NCalc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Agent\AgentsBase.cs" />
+    <Compile Include="Entities\Agent\AI\AIState.cs" />
+    <Compile Include="Entities\Agent\AI\ArtificalInteligence.cs" />
+    <Compile Include="Entities\Agent\Class\AgentClassBase.cs" />
+    <Compile Include="Entities\Agent\Gender.cs" />
+    <Compile Include="Entities\Agent\Race\RaceBase.cs" />
+    <Compile Include="Entities\Agent\Stats\StatBase.cs" />
+    <Compile Include="Helper\Dice.cs" />
+    <Compile Include="Entities\Items\AllocationSlot.cs" />
+    <Compile Include="Entities\Items\Gear.cs" />
+    <Compile Include="Entities\Items\ItemBase.cs" />
+    <Compile Include="Entities\Items\ItemType.cs" />
+    <Compile Include="Entities\Items\Weapons\Weapon.cs" />
+    <Compile Include="Entities\Items\Weapons\WeaponTargetType.cs" />
+    <Compile Include="Entities\Map\ChildGrid.cs" />
+    <Compile Include="Entities\Map\DOMLoader.cs" />
+    <Compile Include="Entities\Map\Grid.cs" />
+    <Compile Include="Entities\Map\MapDOM.cs" />
+    <Compile Include="Entities\Map\ParentGrid.cs" />
+    <Compile Include="Entities\PlayerInstanceManager.cs" />
+    <Compile Include="Entities\Renderable.cs" />
+    <Compile Include="Entities\Tiles\TileBase.cs" />
+    <Compile Include="GameState\StateBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lock\AccessDenied.csproj">
+      <Project>{f827e093-ab87-4493-aa82-8d084bc879c2}</Project>
+      <Name>AccessDenied</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Omnicatz.Helper\Omnicatz.Helper.csproj">
+      <Project>{2c50e7f0-5827-45f8-87ca-49d55191c87d}</Project>
+      <Name>Omnicatz.Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

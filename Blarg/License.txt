@@ -1,0 +1,4 @@
+﻿© Copyright 2016 Karl Axel Lindström 
+This is all the code that could not go into assets and is only avalible as a sample and may not be redistributed or derived from.
+except for program.cs which you may copy as much as you want :p
+(especially the full screen console code which is rather handy...)
