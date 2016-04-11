@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Omnicatz.AccessDenied;
 
 namespace SakuraBlue.Entities.Agent.Race {
-    [Singleton]
     public class Narugan : RaceBase {
         public Narugan(LockToken token) : base(token) {
             rates = new Dictionary<Type, float>() {

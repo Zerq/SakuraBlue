@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Omnicatz.AccessDenied;
 
 namespace SakuraBlue.Entities.Agent.Race {
-    [Singleton]
     public class Human : RaceBase {
         public Human(LockToken token) : base(token) {
             rates = new Dictionary<Type, float>() {

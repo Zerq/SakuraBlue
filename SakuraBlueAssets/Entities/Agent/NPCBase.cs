@@ -40,7 +40,7 @@ namespace SakuraBlue.Entities.Agent {
 
 
             Strenght = new StrenghtStat(this);
-            HP = new HealthPointsStat(this);
+            HP = new HealthPointsStat(this);   
             constitution = new ConstitutuinStat(this);
             Stamina = new StaminaStat(this);
             Awareness = new AwarnessStat(this);

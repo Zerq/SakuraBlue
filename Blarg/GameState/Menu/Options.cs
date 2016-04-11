@@ -9,7 +9,6 @@ using SakuraBlue.Entities.Agent;
 
 namespace SakuraBlue.GameState.Menu
 {
-    [Singleton]
     public class Options : GameStateBase
     {
         public Options(LockToken token) : base(token)

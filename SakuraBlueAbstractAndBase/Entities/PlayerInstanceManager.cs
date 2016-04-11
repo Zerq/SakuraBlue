@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 namespace Omnicatz.Engine.Entities {
     public sealed class PlayerInstanceManager {
 
-        public interface IIWorld {
+        public interface IWorld {
             AgentBase GetPlayer();
+            AgentBase[,] GetAgentMap();
+            T AddAgent<T>(params object[] parameters) where T : AgentBase;
         }
   
         public static void SetPlayer(AgentBase player)  {
@@ -24,7 +26,7 @@ namespace Omnicatz.Engine.Entities {
 
 
         //return Player if the correct world is provided
-        public static AgentBase GetPlayer(IIWorld world) {
+        public static AgentBase GetPlayer(IWorld world) {
           return  world.GetPlayer();
 
             //if (player != null) {

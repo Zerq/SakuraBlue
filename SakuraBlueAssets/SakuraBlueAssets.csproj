@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Agent\Abilities\Attack.cs" />
+    <Compile Include="Entities\Agent\Abilities\Dictionary.cs" />
     <Compile Include="Entities\Agent\Class\GamblerClass.cs" />
     <Compile Include="Entities\Agent\Class\MageClass.cs" />
     <Compile Include="Entities\Agent\Class\WarriorClass.cs" />
@@ -150,9 +152,7 @@
       <Name>SakuraBlueAbstractAndBase</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Agent\Abilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,6 @@ using SakuraBlue.Entities.Agent;
 using Omnicatz.Engine.Entities;
 
 namespace SakuraBlue.GameState.Menu {
-    [Singleton]
     public class TopMenu : GameMenuBaseState {
         public TopMenu(LockToken token) : base(token) {
 

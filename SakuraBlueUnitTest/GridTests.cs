@@ -8,7 +8,7 @@ namespace SakuraBlueUnitTest {
     [TestClass]
     public class GridTests {      
 
-        private void GetTestMap(out Bitmap bmp, out SakuraBlue.Entities.Map.ParentGrid grid ) {
+        public static void GetTestMap(out Bitmap bmp, out SakuraBlue.Entities.Map.ParentGrid grid ) {
             TileBase[]  pallet = SakuraBlue.Entities.Map.ParentGrid.GetPallet(typeof(SakuraBlue.Entities.Tiles.Bridge).Assembly);
             var path =  $"{AppDomain.CurrentDomain.BaseDirectory}\\Maps\\map1.bmp";
             bmp =  new Bitmap(path);

@@ -56,7 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Agent\AI\HostileAI.cs" />
-    <Compile Include="GameState\BattleState\BattleManager.cs" />
+    <Compile Include="GameState\BattleState\Battle.cs" />
+    <Compile Include="GameState\BattleState\BattleEventScripts.cs" />
+    <Compile Include="GameState\BattleState\BattleField.cs" />
     <Compile Include="GameState\BattleState\BattleState.cs" />
     <Compile Include="GameState\Map.cs" />
     <Compile Include="GameState\Menu\ClassChoice.cs" />

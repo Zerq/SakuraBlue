@@ -7,7 +7,6 @@ using Omnicatz.AccessDenied;
 using Omnicatz.Helper;
 
 namespace SakuraBlue.GameState {
-    [Singleton]
     public  class GameMenuBaseState : GameStateBase {
         public GameMenuBaseState(LockToken token) : base(token) {
        

@@ -10,7 +10,6 @@ using SakuraBlue.Entities.Agent;
 namespace SakuraBlue.GameState.Menu {
 
     //Character creation gender selection state
-    [Singleton]
     public class GenderChoice : GameMenuBaseState {
         public GenderChoice(LockToken token) : base(token) {
 

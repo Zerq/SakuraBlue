@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SakuraBlue.Entities.Tiles {
-    [Singleton]
+
     public  abstract  class TileBase: Renderable {
         public TileBase(LockToken lockToken) {
             LockToken.Enforce<TileBase>(lockToken);    

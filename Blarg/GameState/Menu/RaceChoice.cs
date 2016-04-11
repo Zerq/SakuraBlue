@@ -11,7 +11,6 @@ using SakuraBlue.Entities.Agent.Class;
 namespace SakuraBlue.GameState.Menu {
 
     //character creation Race selector state
-    [Singleton]
     public class RaceChoice : GameMenuBaseState {
         public RaceChoice(LockToken token) : base(token) {
 

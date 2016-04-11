@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 
 namespace SakuraBlue.Entities.Agent.Race {
-    [Singleton]
     public abstract class RaceBase {
         public RaceBase(LockToken token) { }
         public abstract Char Character { get;  }

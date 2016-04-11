@@ -45,7 +45,11 @@
     <Compile Include="Helper\ConsoleHelper.cs" />
     <Compile Include="Helper\DialogHelper.cs" />
     <Compile Include="Helper\KeyInterface.cs" />
+    <Compile Include="Helper\RandomlyBrainFuck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,4 @@
+﻿© Copyright 2016 Karl Axel Lindström 
+The AccessDenied project is licensed under LGPL-3.0 license https://opensource.org/licenses/LGPL-3.0
+
+Not that this is much to really copy right anyway it's just a sneaky generic way of making singletons very easily :p

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Omnicatz.AccessDenied;
 
 namespace SakuraBlue.Entities.Agent.Race {
-    [Singleton]
     public class Djin : RaceBase {
         public Djin(LockToken token) : base(token){
 

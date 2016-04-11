@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SakuraBlue.Entities.Tiles {
-    [Singleton]
     public class Water : TileBase {
 
         public Water(LockToken singletonLock): base(singletonLock) {}

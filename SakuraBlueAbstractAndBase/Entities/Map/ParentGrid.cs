@@ -13,7 +13,7 @@ namespace SakuraBlue.Entities.Map
     /// <summary>
     /// this is the map grid object ment to be used to load grids and devide  part of into child grids
     /// </summary>
-    public class ParentGrid : Grid, PlayerInstanceManager.IIWorld {
+    public class ParentGrid : Grid, PlayerInstanceManager.IWorld {
 
         public ParentGrid(string path, TileBase[] pallet) : base(0, 0)/*disike this*/
         {

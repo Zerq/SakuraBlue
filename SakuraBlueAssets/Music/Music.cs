@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SakuraBlue.Media
 {
-    [Singleton]
     public class Music
     {
         public Music(LockToken lockToken){

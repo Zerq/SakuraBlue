@@ -6,8 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SakuraBlue.GameState {
-    [Singleton]
+ 
     public abstract class GameStateBase {
+        public GameStateBase(LockToken token) {
+            LockToken.Enforce<GameStateBase>(token);
+            RunInitiate();
+        }
+
         private bool draw = false;
         public void RedrawNext() {
             draw = true;
@@ -16,10 +21,7 @@ namespace SakuraBlue.GameState {
             get { return draw; }
         }
 
-        public GameStateBase(LockToken token) {
-            LockToken.Enforce<GameStateBase>(token);
-            RunInitiate();
-        }
+
         protected abstract void Initiate();
         private bool initiated = false;
         public void RunInitiate() {

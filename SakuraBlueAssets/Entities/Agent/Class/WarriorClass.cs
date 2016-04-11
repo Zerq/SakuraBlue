@@ -8,7 +8,7 @@ using SakuraBlue.Entities.Items;
 using SakuraBlue.Entities.Items.Weapons;
 
 namespace SakuraBlue.Entities.Agent.Class {
-    [Singleton]
+
     public class WarriorClass : AgentClassBase {
         public WarriorClass(LockToken token): base(token) {
         rates = new Dictionary<Type, float>() {

@@ -17,11 +17,8 @@ namespace SakuraBlue.GameState.Menu {
     /// <summary>
     /// Character Creation Screen
     /// </summary>
-    [Singleton]
     public class NewGame : GameMenuBaseState {
-        public NewGame(LockToken token) : base(token) {
-
-        }
+        public NewGame(LockToken token) : base(token) {}
 
 
         public string Name = null;

@@ -3,7 +3,6 @@ using System;
 using System.Drawing;
 
 namespace SakuraBlue.Entities.Tiles {
-    [Singleton]
     internal class Sand: TileBase {
         public Sand(LockToken singletonLock): base(singletonLock) {}
 

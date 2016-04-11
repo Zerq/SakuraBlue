@@ -7,7 +7,6 @@ using SakuraBlue.Entities.Agent;
 using Omnicatz.Engine.Entities;
 
 namespace SakuraBlue.GameState {
-    [Singleton]
     public class Map : GameStateBase {
 
 

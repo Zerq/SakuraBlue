@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Omnicatz.AccessDenied;
 
 namespace SakuraBlue.Entities.Agent.Race {
-    [Singleton]
     public class XiongMao : RaceBase {
         public XiongMao(LockToken token) : base(token){
 

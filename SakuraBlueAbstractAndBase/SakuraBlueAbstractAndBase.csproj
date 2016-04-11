@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Agent\Abilities\AbilityBase.cs" />
     <Compile Include="Entities\Agent\AgentsBase.cs" />
     <Compile Include="Entities\Agent\AI\AIState.cs" />
     <Compile Include="Entities\Agent\AI\ArtificalInteligence.cs" />

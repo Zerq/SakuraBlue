@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace SakuraBlue.Entities.Agent.Class {
-    [Singleton]
+
     public abstract class AgentClassBase {
         public abstract string Name { get; }
         public  abstract ConsoleColor Color { get;  }

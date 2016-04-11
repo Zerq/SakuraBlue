@@ -3,7 +3,6 @@ using System;
 using System.Drawing;
 
 namespace SakuraBlue.Entities.Tiles {
-    [Singleton]
     public class Bridge :TileBase {
         public Bridge(LockToken lockToken): base(lockToken) {
 

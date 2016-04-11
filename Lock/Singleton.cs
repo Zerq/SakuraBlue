@@ -8,15 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Omnicatz.AccessDenied{
-    /// <summary>
-    /// Generic singleton with the ability to instnsiate classes with  singleton parameter in the constructor
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-
-    [AttributeUsage(AttributeTargets.Class)]
-    public class SingletonAttribute : Attribute
-    {}
-
 
 
    
@@ -65,28 +56,9 @@ namespace Omnicatz.AccessDenied{
             public static T GetInstance(params object[] parameters) {
             var tempParams = new List<object>();
             tempParams.Add(new LockToken());
-            tempParams.AddRange(parameters);
-
-
-            var singleTonAttribute = typeof(T).GetCustomAttributes(true).FirstOrDefault(n => n.GetType() == typeof(SingletonAttribute)) as SingletonAttribute;
-           // var whiteListAttribute = typeof(T).GetCustomAttributes(true).FirstOrDefault(n => n.GetType() == typeof(InstantiatorWhiteListAttribute)) as InstantiatorWhiteListAttribute;
-
-            if (singleTonAttribute != null) {
-
-                //if (whiteListAttribute != null) {
-                //    if (instance == null) {
-                //        instance = WhiteListInstantiator<T>.NewInstance(parameters);
-                //    }
-                //    return instance;
-                //}
-                //else
-                //{
-                    if (instance == null) { instance = (T)Activator.CreateInstance(typeof(T), tempParams.ToArray()); }
-                    return instance;
-                //}
-                } else {
-                    throw new ApplicationException($"{typeof(T).FullName} is not annotated as a singleton!");
-                }
+            tempParams.AddRange(parameters);  
+                          if (instance == null) { instance = (T)Activator.CreateInstance(typeof(T), tempParams.ToArray()); }
+                    return instance; 
             }
 
             public static bool HasInstance => instance != null;
@@ -111,31 +83,8 @@ namespace Omnicatz.AccessDenied{
                     return message;
                 }
             }
-            public LockTokenIsNullException(Type type) {
-                
-            
-
-                var singleTonAttribute = type.GetCustomAttributes(true).FirstOrDefault(n => n.GetType() == typeof(SingletonAttribute)) as SingletonAttribute;
-              //  var whiteListAttribute = type.GetCustomAttributes(true).FirstOrDefault(n => n.GetType() == typeof(InstantiatorWhiteListAttribute)) as InstantiatorWhiteListAttribute;
-
-                if (singleTonAttribute != null)
-                {
-                    //if (whiteListAttribute != null)
-                    //{
-                    //    message = $"{type} may only be instantiated with the Omnicatz.AccessDenied.Singleton or Singleton<{type}> class inside of any of the white listed classes {whiteListAttribute.AllowedTypes.Select(n => n.Name).ToString()}";
-                    //}
-                    //else
-                    //{
-                        message = $"{type} may only be instantiated with the Omnicatz.AccessDenied.Singleton or Singleton<{type}> class";
-                    //}
-                }
-                //else
-                //{
-                //    message = $"{type} may only be instantiated with the Omnicatz.AccessDenied.WhiteListInstantiator<{type}> class inside of any of the white listed classes {whiteListAttribute.AllowedTypes.Select(n => n.Name).ToString()}";
-
-                //}
-
-
+            public LockTokenIsNullException(Type type) {      
+              message = $"{type} may only be instantiated with the Omnicatz.AccessDenied.Singleton or Singleton<{type}> class";
             }
         }
 

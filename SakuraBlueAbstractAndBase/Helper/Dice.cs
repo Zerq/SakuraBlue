@@ -17,7 +17,6 @@ namespace Omnicatz.Helper {
         }
     }
 
-    [Singleton]
     public static class Dice {
    
         public static Double CalculateDiceFormula(string formula) {

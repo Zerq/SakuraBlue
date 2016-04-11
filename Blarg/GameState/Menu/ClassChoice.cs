@@ -13,7 +13,6 @@ namespace SakuraBlue.GameState.Menu {
     /// <summary>
     /// chracterCreation class selection state
     /// </summary>
-    [Singleton]
     public class ClassChoice : GameMenuBaseState {
         public ClassChoice(LockToken token) : base(token) {
 
