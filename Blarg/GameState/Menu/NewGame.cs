@@ -419,6 +419,10 @@ namespace SakuraBlue.GameState.Menu {
         public void Addplayer(AgentBase player) {
             this.playerAsBase = player;
         }
+        
+        public void Transfer(IReceptiveWorld targetWorld, AgentBase agent, object parameter = null) {
+            throw new NotImplementedException();
+        }
     }
 
 

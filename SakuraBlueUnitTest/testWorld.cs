@@ -43,9 +43,12 @@ namespace SakuraBlueUnitTest {
             }
         }
 
+        public void Transfer(IWorld targetWorld, AgentBase agent) {
+            throw new NotImplementedException();
+        }
 
-
-
-
+        public void Transfer(IReceptiveWorld targetWorld, AgentBase agent, object parameter) {
+            throw new NotImplementedException();
+        }
     }
 }

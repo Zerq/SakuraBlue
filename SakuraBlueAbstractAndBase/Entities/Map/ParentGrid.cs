@@ -14,7 +14,7 @@ namespace SakuraBlue.Entities.Map
     /// <summary>
     /// this is the map grid object ment to be used to load grids and devide  part of into child grids
     /// </summary>
-    public class ParentGrid : Grid,IWorld {
+    public class ParentGrid : Grid,IReceptiveWorld {
 
         public ParentGrid(string path, TileBase[] pallet) : base(0, 0)/*disike this*/
         {
@@ -52,7 +52,10 @@ namespace SakuraBlue.Entities.Map
                 AgentBase[,] result = new AgentBase[Tiles.GetLength(0), Tiles.GetLength(1)];
             Agents.ForEach(n => result[n.X, n.Y] = n);
             return result;
-            } 
+            }
+        public AgentBase GetAgent(int x, int y) {
+            return Agents.FirstOrDefault(n => n.X == x && n.Y == y);
+        }
         public T AddAgent<T>(params object[] parameters) where T : AgentBase
         {
             List<object> parameterList = new List<object>();
@@ -99,6 +102,16 @@ namespace SakuraBlue.Entities.Map
             });
 
             return result;
+        }
+
+
+        public void Recive(AgentBase agent, object parameter=null) {
+            this.Agents.Add(agent);
+        }
+
+        public void Transfer(IReceptiveWorld targetWorld, AgentBase agent, object parameter=null) {
+            targetWorld.Recive(agent);
+            this.Agents.Remove(agent);
         }
     }
 
