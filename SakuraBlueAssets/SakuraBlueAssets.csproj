@@ -56,11 +56,13 @@
     <Compile Include="Entities\Agent\Stats\FireStat.cs" />
     <Compile Include="Entities\Agent\Stats\HealthPointsStat.cs" />
     <Compile Include="Entities\Agent\Stats\LightStat.cs" />
+    <Compile Include="Entities\Agent\Stats\SpeedStat.cs" />
     <Compile Include="Entities\Agent\Stats\OrderStat.cs" />
     <Compile Include="Entities\Agent\Stats\StaminaStat.cs" />
     <Compile Include="Entities\Agent\Stats\StatAssetBase.cs" />
     <Compile Include="Entities\Agent\Stats\StealthStat.cs" />
     <Compile Include="Entities\Agent\Stats\StrenghtStat.cs" />
+    <Compile Include="Entities\Agent\Stats\AgilityStat.cs" />
     <Compile Include="Entities\Agent\Stats\WaterStat.cs" />
     <Compile Include="Entities\Agent\Stats\WindStat.cs" />
     <Compile Include="Entities\Items\Weapons\BroadSword.cs" />

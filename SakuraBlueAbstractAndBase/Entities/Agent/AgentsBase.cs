@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using SakuraBlue.Entities.Map;
 using SakuraBlue.Entities.Items;
+using SakuraBlueAbstractAndBase.Entities.Map;
 
 namespace SakuraBlue.Entities.Agent {
     public abstract class AgentBase : Renderable {
-        public AgentBase(ParentGrid grid) {
-            this.Grid = grid;
+        public AgentBase(IWorld grid) {
+            this.World = grid;
             this.Inventory = new List<ItemBase>();
         }
 
@@ -91,7 +92,7 @@ namespace SakuraBlue.Entities.Agent {
 
         public virtual List<ItemBase> Inventory { get; set; }
  
-        public ParentGrid Grid { get; private set; }
+        public IWorld World { get; private set; }
 
     }
 

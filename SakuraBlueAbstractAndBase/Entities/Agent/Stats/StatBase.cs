@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SakuraBlue.Entities.Agent.Stats {
-    public abstract class StatBase {
-        public StatBase(AgentBase agent) {
+    public abstract class StatBase<T> where T :AgentBase {
+        public StatBase(T agent) {
             Agent = agent;
             agent.OnRegenerate += Agent_OnRegenerate;
         }
@@ -43,6 +43,6 @@ namespace SakuraBlue.Entities.Agent.Stats {
                 return result;
             }
         }
-        public AgentBase Agent { get; private set; }
+        public T Agent { get; private set; }
     }
 }

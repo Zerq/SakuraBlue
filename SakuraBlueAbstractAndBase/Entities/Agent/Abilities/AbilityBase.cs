@@ -28,7 +28,7 @@ namespace SakuraBlueAbstractAndBase.Entities.Agent.Abilities {
         public abstract string Description { get; }
        
         //cost in various consumable stats
-        public abstract Dictionary<StatBase, int> Cost { get; }
+        public abstract Dictionary<StatBase<T>, int> Cost { get; }
 
           /// <summary>
           /// Must be manually triggered in UI

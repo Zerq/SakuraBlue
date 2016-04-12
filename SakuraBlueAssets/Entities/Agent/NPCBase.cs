@@ -8,6 +8,7 @@ using SakuraBlue.Entities.Map;
 using SakuraBlue.Entities.Agent.Class;
 using SakuraBlue.Entities.Items;
 using SakuraBlue.Entities.Agent.Stats;
+using SakuraBlueAbstractAndBase.Entities.Map;
 
 namespace SakuraBlue.Entities.Agent {
     public class NPCBase : AgentBase {
@@ -18,7 +19,7 @@ namespace SakuraBlue.Entities.Agent {
         /// 
  
 
-        private NPCBase(Gender gender, RaceBase race, Class.AgentClassBase @class, string name, NPCBase Leader) :this(Leader.Grid,gender,race,@class,name,0,0) {
+        private NPCBase(Gender gender, RaceBase race, Class.AgentClassBase @class, string name, NPCBase Leader) :this(Leader.World,gender,race,@class,name,0,0) {
             if (Leader.PartyMembers == null) {
                 Leader.PartyMembers = new List<NPCBase>();
             }
@@ -30,7 +31,7 @@ namespace SakuraBlue.Entities.Agent {
         /// <summary>
         /// Create Leader
         /// </summary>
-        public NPCBase(ParentGrid grid, Gender gender, RaceBase race, Class.AgentClassBase @class, string name, int x, int y) : base(grid) {
+        public NPCBase(IWorld grid, Gender gender, RaceBase race, Class.AgentClassBase @class, string name, int x, int y) : base(grid) {
             this.X = x;
             this.Y = y;
             this.Race = race;
@@ -39,21 +40,25 @@ namespace SakuraBlue.Entities.Agent {
             this.Class = @class;
 
 
-            Strenght = new StrenghtStat(this);
-            HP = new HealthPointsStat(this);   
-            constitution = new ConstitutuinStat(this);
-            Stamina = new StaminaStat(this);
-            Awareness = new AwarnessStat(this);
-            Stealth = new StealthStat(this);
-            Fire = new FireStat(this);
-            Water = new WaterStat(this);
-            Wind = new WindStat(this);
-            Earth = new EarthStat(this);
-            Chaos = new ChaosStat(this);
-            Order = new Orderstat(this);
-            Light = new LightStat(this);
-            Darkness = new DarkStat(this);
+            this.Fire = new FireStat(this);
+            this.Water = new WaterStat(this);
+            this.Wind = new WindStat(this);
+            this.Earth = new EarthStat(this);
+            this.Chaos = new ChaosStat(this);
+            this.Order = new Orderstat(this);
+            this.Light = new LightStat(this);
+            this.Darkness = new DarkStat(this);
 
+            this.Strenght = new StrenghtStat(this);
+            this.HP = new HealthPointsStat(this);
+            this.Constitution = new ConstitutuinStat(this);
+            this.Stamina = new StaminaStat(this);
+            this.Awareness = new AwarnessStat(this);
+            this.Stealth = new StealthStat(this);
+            this.Speed = new speedStat(this);
+            this.Agility = new AgilityStat(this);
+            this.Dexterity = new DexterityStat(this);
+         
 
             //change later baced on race maybe?
             this.HP.MaxBase = 5;
@@ -84,12 +89,31 @@ namespace SakuraBlue.Entities.Agent {
         public RaceBase Race { get; set; }
         public AgentClassBase Class { get; set; }
 
+
         public Stats.StrenghtStat Strenght { get; set; }
+        public Stats.DexterityStat Dexterity { get; set; }
+        public Stats.AgilityStat Agility { get; set; }
         public Stats.HealthPointsStat HP { get; set; }
-        public Stats.ConstitutuinStat constitution { get; set; }
         public Stats.StaminaStat Stamina { get; set; }
+
+
+       
+        public Stats.ConstitutuinStat Constitution { get; set; }
         public Stats.AwarnessStat Awareness { get; set; }
         public Stats.StealthStat Stealth { get; set; }
+
+
+        public Stats.speedStat Speed { get; set; }
+
+
+
+
+
+
+
+        //derived Stats
+      // 
+
 
         public Stats.FireStat Fire { get; set; }
         public Stats.WaterStat Water { get; set; }
@@ -145,6 +169,6 @@ namespace SakuraBlue.Entities.Agent {
                 }
             }
         }
-        public virtual ArtificalInteligence<NPCBase> AI { get; set; }
+        public virtual GridAI<NPCBase> AI { get; set; }
     }
 }

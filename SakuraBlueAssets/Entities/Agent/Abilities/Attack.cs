@@ -11,8 +11,8 @@ using SakuraBlue.Entities.Items.Weapons;
 namespace SakuraBlueAssets.Entities.Agent.Abilities {
     public class Attack: AbilityBase<NPCBase>  {
 
-      Dictionary<StatBase, int> cost = new Dictionary<StatBase, int>() { { Singleton<StaminaStat>.GetInstance(), 3 } };
-      public override Dictionary<StatBase,int> Cost {
+      Dictionary<StatBase<NPCBase>, int> cost = new Dictionary<StatBase<NPCBase>, int>() { { Singleton<StaminaStat>.GetInstance(), 3 } };
+      public override Dictionary<StatBase<NPCBase>,int> Cost {
             get {
                 return cost;
             }

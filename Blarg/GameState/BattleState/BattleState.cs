@@ -52,7 +52,6 @@ namespace SakuraBlue.GameState.BattleState
                 DialogHelper.WriteDialog(ConsoleColor.Yellow, ConsoleColor.Black, 130, 0, 54, $"{enemy.Name}:");
                 int i = 1;
                 enemy.PartyMembers?.ForEach(n => {
-
                     DialogHelper.WriteDialog(ConsoleColor.Red, ConsoleColor.Black, 130, (i *5), 54, $"{n.Name}:");
                     i++;
                 }
@@ -60,12 +59,12 @@ namespace SakuraBlue.GameState.BattleState
 
                 DialogHelper.WriteDialog(ConsoleColor.Blue, ConsoleColor.Black, 184, 0, 54, 
                     $"{player.Name} ({player.Race.Name} {player.Class.Name})",
-                    $"Hp:{player.HP.Current} Stamina {player.Stamina.Current}",
+                    $"Hp:{player.HP.MaxBase} Stamina {player.Stamina.MaxBase}",
                    "Magic--------------",
-                    $"Fire:{player.Fire.Current} Water:{player.Water.Current}",
-                    $"Earth:{player.Earth.Current} Wind:{player.Wind.Current}",
-                    $"Chaos:{player.Chaos.Current} Order:{player.Order.Current}",
-                    $"Dark:{player.Darkness.Current} Light:{player.Light.Current}"
+                    $"Fire:{player.Fire.MaxBase} Water:{player.Water.MaxBase}",
+                    $"Earth:{player.Earth.MaxBase} Wind:{player.Wind.MaxBase}",
+                    $"Chaos:{player.Chaos.MaxBase} Order:{player.Order.MaxBase}",
+                    $"Dark:{player.Darkness.MaxBase} Light:{player.Light.MaxBase}"
                     );
                 drawArt = false;
             }

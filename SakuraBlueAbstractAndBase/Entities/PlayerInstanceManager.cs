@@ -1,4 +1,5 @@
 ﻿using SakuraBlue.Entities.Agent;
+using SakuraBlueAbstractAndBase.Entities.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,7 @@ using System.Threading.Tasks;
 namespace Omnicatz.Engine.Entities {
     public sealed class PlayerInstanceManager {
 
-        public interface IWorld {
-            AgentBase GetPlayer();
-            AgentBase[,] GetAgentMap();
-            T AddAgent<T>(params object[] parameters) where T : AgentBase;
-        }
+
   
         public static void SetPlayer(AgentBase player)  {
             //once set you may never use another player type

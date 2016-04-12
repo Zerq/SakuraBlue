@@ -60,9 +60,6 @@ namespace SakuraBlue {
         }
 
         #region window
-
-
-
         [DllImport("user32.dll")]
         public static extern bool ShowWindow(System.IntPtr hWnd, int cmdShow);
 
@@ -114,7 +111,6 @@ namespace SakuraBlue {
             Console.CursorVisible = false;
 
         }
-
         #endregion
     }
 }

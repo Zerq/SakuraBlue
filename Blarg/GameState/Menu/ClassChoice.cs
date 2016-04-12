@@ -7,6 +7,7 @@ using Omnicatz.AccessDenied;
 using Omnicatz.Helper;
 using SakuraBlue.Entities.Agent;
 using SakuraBlue.Entities.Agent.Class;
+using Omnicatz.Engine.Entities;
 
 namespace SakuraBlue.GameState.Menu {
 
@@ -33,11 +34,11 @@ namespace SakuraBlue.GameState.Menu {
     }
 
         public override void Action() {
-
+            var player = PlayerInstanceManager.GetPlayer(Singleton<NewGame>.GetInstance()) as NPCBase;
 
             Exit();
             Program.currentState = Singleton<NewGame>.GetInstance();
-            ((NewGame)Program.currentState).Class = getclasses()[Selected];
+            player.Class = getclasses()[Selected];
             Console.Clear();
             Program.currentState.RedrawNext();
 

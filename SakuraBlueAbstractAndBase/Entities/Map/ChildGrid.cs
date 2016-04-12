@@ -41,7 +41,7 @@ namespace SakuraBlue.Entities.Map
             GridTraverse(0, 0, Tiles.GetLength(0), Tiles.GetLength(1), (y, x) => {//:todo i have no idea why i had to invert the traverse... y and x should be x,y....
 
                 var player = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(this.Parrent);// Entities.Agent.Player.GetPlayer(this.Parrent);
-                var distance = ArtificalInteligence<AgentBase>.Distance(Tiles.GetLength(0) / 2, Tiles.GetLength(1) / 2, x, y);
+                var distance = GridAI<AgentBase>.Distance(Tiles.GetLength(0) / 2, Tiles.GetLength(1) / 2, x, y);
                // if (distance < player.Awareness.Current*2 || showAll) { //InSight
 
 

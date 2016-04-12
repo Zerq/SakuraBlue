@@ -9,9 +9,9 @@ using SakuraBlue.Entities.Map;
 
 namespace SakuraBlue.Entities.Agent
 {
-    public abstract class ArtificalInteligence<T> where T : AgentBase
+    public abstract class GridAI<T> where T : AgentBase
     {
-        public ArtificalInteligence(T me) {
+        public GridAI(T me) {
             this.me = me;
         }
 
@@ -32,32 +32,31 @@ namespace SakuraBlue.Entities.Agent
         public abstract void TurnStep();
 
         private Tiles.TileBase GetDirection(Direction direction) {
-
-            switch (direction) {
-                case Direction.Up:
-                    if (me.Y - 1 > 0)
-                    {
-                        return me.Grid.Tiles[me.X, me.Y - 1];
-                    }
-                    break;
-                case Direction.Down:
-                    if (me.Y + 1 < me.Grid.Tiles.GetLength(1))
-                    {
-                        return me.Grid.Tiles[me.X, me.Y + 1];
-                    }
-                    break;
-                case Direction.Left:
-                    if (me.X - 1 > 0)
-                    {
-                        return me.Grid.Tiles[me.X - 1, me.Y ];
-                    }
-                    break;
-                case Direction.Right:
-                    if (me.X + 1 < me.Grid.Tiles.GetLength(0))
-                    {
-                        return me.Grid.Tiles[me.X + 1, me.Y];
-                    }
-                    break;
+            //hmmm.. aught to do this in a neater way maybe some kind of inversion of control or something not sure....
+            if (typeof(Grid).IsAssignableFrom(me.World.GetType())){
+                Grid grid = me.World as Grid;
+                switch (direction) {
+                    case Direction.Up:
+                        if (me.Y - 1 > 0) {
+                            return grid.Tiles[me.X, me.Y - 1];
+                        }
+                        break;
+                    case Direction.Down:
+                        if (me.Y + 1 < grid.Tiles.GetLength(1)) {
+                            return grid.Tiles[me.X, me.Y + 1];
+                        }
+                        break;
+                    case Direction.Left:
+                        if (me.X - 1 > 0) {
+                            return grid.Tiles[me.X - 1, me.Y];
+                        }
+                        break;
+                    case Direction.Right:
+                        if (me.X + 1 < grid.Tiles.GetLength(0)) {
+                            return grid.Tiles[me.X + 1, me.Y];
+                        }
+                        break;
+                }
             }
             return null;
         }
@@ -69,7 +68,7 @@ namespace SakuraBlue.Entities.Agent
             { Direction.Right, new Point(1,0) }};
 
         protected int Distance() {
-            var target = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(me.Grid);//  Player.GetPlayer(me.Grid);
+            var target = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(me.World);//  Player.GetPlayer(me.Grid);
             //var x = Math.Abs(me.X - target.X);
             //var y = System.Math.Abs(me.Y - target.Y);
             //return Convert.ToInt32(Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)));
@@ -85,7 +84,7 @@ namespace SakuraBlue.Entities.Agent
         }
 
         protected void Huristics(Direction direction,  out int manhatan, out int straightline) {
-            var target = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(me.Grid);//   Player.GetPlayer(me.Grid);
+            var target = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(me.World);//   Player.GetPlayer(me.Grid);
 
 
             var passable = GetDirection(direction)?.IsPassable;      
@@ -119,7 +118,7 @@ namespace SakuraBlue.Entities.Agent
 
 
         protected Agent.Direction? AStar() {
-            var target = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(me.Grid);//  Player.GetPlayer(me.Grid);
+            var target = Omnicatz.Engine.Entities.PlayerInstanceManager.GetPlayer(me.World);//  Player.GetPlayer(me.Grid);
 
             int max = 0;
             Direction? best = null; // closed in

@@ -7,13 +7,14 @@ using System.Drawing;
 using System.Linq;
 using Omnicatz.Engine.Entities;
 using System.Reflection;
+using SakuraBlueAbstractAndBase.Entities.Map;
 
 namespace SakuraBlue.Entities.Map
 {
     /// <summary>
     /// this is the map grid object ment to be used to load grids and devide  part of into child grids
     /// </summary>
-    public class ParentGrid : Grid, PlayerInstanceManager.IWorld {
+    public class ParentGrid : Grid,IWorld {
 
         public ParentGrid(string path, TileBase[] pallet) : base(0, 0)/*disike this*/
         {

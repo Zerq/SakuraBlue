@@ -11,7 +11,7 @@ using Omnicatz.Engine.Entities;
 
 namespace SakuraBlue.Entities.Map {
 
-  
+
     /// <summary>
     /// this containts the basics of a grid object
     /// </summary>

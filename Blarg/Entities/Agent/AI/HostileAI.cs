@@ -8,7 +8,7 @@ using Omnicatz.AccessDenied;
 using Omnicatz.Engine.Entities;
 
 namespace SakuraBlue.Entities.Agent.AI {
-    public class HostileAI : ArtificalInteligence<NPCBase> {
+    public class HostileAI : GridAI<NPCBase> {
 
         public HostileAI(NPCBase me) : base(me) {
 
@@ -21,7 +21,7 @@ namespace SakuraBlue.Entities.Agent.AI {
         } = AIState.Normal;
 
         public override void Detect() {
-            var target = PlayerInstanceManager.GetPlayer(me.Grid) as NPCBase;
+            var target = PlayerInstanceManager.GetPlayer(me.World) as NPCBase;
 
             if (this.Distance()<2) {
                 Console.Clear();

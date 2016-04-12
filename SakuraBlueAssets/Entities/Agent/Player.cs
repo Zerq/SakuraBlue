@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SakuraBlue.Entities.Map;
+using SakuraBlueAbstractAndBase.Entities.Map;
 
 namespace SakuraBlue.Entities.Agent {
 
@@ -12,7 +13,7 @@ namespace SakuraBlue.Entities.Agent {
     public class Player : NPCBase {
 
 
-        public Player(ParentGrid grid, Gender gender, RaceBase race, Class.AgentClassBase @class, string name, int x, int y) : base(grid, gender, race, @class, name, x, y) {
+        public Player(IWorld grid, Gender gender, RaceBase race, Class.AgentClassBase @class, string name, int x, int y) : base(grid, gender, race, @class, name, x, y) {
           this.AI = null;
         }
 
@@ -20,7 +21,7 @@ namespace SakuraBlue.Entities.Agent {
 
         public override string AgentMove(ParentGrid grid, Direction direction) {
             var result =  base.AgentMove(grid, direction);
-            foreach (Agent.NPCBase npc in ((ParentGrid)this.Grid).Agents) {
+            foreach (Agent.NPCBase npc in ((ParentGrid)this.World).Agents) {
                 if (npc.GetType() != typeof(Player)) {
                     if (npc.AI != null) {
                         npc.AI.Detect();

@@ -53,6 +53,7 @@
     <Compile Include="Entities\Agent\Gender.cs" />
     <Compile Include="Entities\Agent\Race\RaceBase.cs" />
     <Compile Include="Entities\Agent\Stats\StatBase.cs" />
+    <Compile Include="Entities\Map\IWorld.cs" />
     <Compile Include="Helper\Dice.cs" />
     <Compile Include="Entities\Items\AllocationSlot.cs" />
     <Compile Include="Entities\Items\Gear.cs" />

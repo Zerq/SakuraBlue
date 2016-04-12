@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Omnicatz.AccessDenied;
 using Omnicatz.Helper;
 using SakuraBlue.Entities.Agent;
+using Omnicatz.Engine.Entities;
 
 namespace SakuraBlue.GameState.Menu {
 
@@ -24,11 +25,12 @@ namespace SakuraBlue.GameState.Menu {
     }
 
         public override void Action() {
+            var player = PlayerInstanceManager.GetPlayer(Singleton<NewGame>.GetInstance()) as NPCBase;
 
 
             Exit();
             Program.currentState = Singleton<NewGame>.GetInstance();
-            ((NewGame)Program.currentState).CharacterGender = (Gender) Enum.Parse(typeof(Gender), options[Selected]);
+            player.Gender = (Gender) Enum.Parse(typeof(Gender), options[Selected]);
             Console.Clear();
             Program.currentState.RedrawNext();
 

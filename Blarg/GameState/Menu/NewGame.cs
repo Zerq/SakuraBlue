@@ -11,91 +11,118 @@ using SakuraBlue.Entities.Agent.Class;
 using SakuraBlue.Entities.Agent.Stats;
 using SakuraBlue.Entities.Items;
 using Omnicatz.Engine.Entities;
+using SakuraBlueAbstractAndBase.Entities.Map;
 
 namespace SakuraBlue.GameState.Menu {
+
+
 
     /// <summary>
     /// Character Creation Screen
     /// </summary>
-    public class NewGame : GameMenuBaseState {
-        public NewGame(LockToken token) : base(token) {}
+    public class NewGame : GameMenuBaseState, IWorld {
+        public NewGame(LockToken @lock) : base(@lock) {
+            LockToken.Enforce<NewGame>(@lock);
+            this.playerAsBase = this.AddAgent<Entities.Agent.Player>(Entities.Agent.Gender.Male, Singleton<Human>.GetInstance(), Singleton<WarriorClass>.GetInstance(), "John Doe", 3, 5);
+            PlayerInstanceManager.SetPlayer(this.playerAsBase);
+        }
 
 
-        public string Name = null;
-        public Entities.Agent.Gender? CharacterGender = null;
-        public RaceBase Race = null;
-        public AgentClassBase Class = null;
 
-        int fireBonus => Race != null ? Race.StatBonusBonus<FireStat>() : 0;
-        int waterBonus => Race != null ? Race.StatBonusBonus<WaterStat>() : 0;
-        int earthBonus => Race != null ? Race.StatBonusBonus<EarthStat>() : 0;
-        int windBonus => Race != null ? Race.StatBonusBonus<WindStat>() : 0;
+        //public string Name = null;
+        //public Entities.Agent.Gender? CharacterGender = null;
+        //public RaceBase Race = null;
+        //public AgentClassBase Class = null;
 
-        int chaosBonus => Race != null ? Race.StatBonusBonus<ChaosStat>() : 0;
-        int orderBonus => Race != null ? Race.StatBonusBonus<Orderstat>() : 0;
-        int lightBonus => Race != null ? Race.StatBonusBonus<LightStat>() : 0;
-        int darkBonus => Race != null ? Race.StatBonusBonus<DarkStat>() : 0;
+        //int fireBonus => Race != null ? Race.StatBonusBonus<FireStat>() : 0;
+        //int waterBonus => Race != null ? Race.StatBonusBonus<WaterStat>() : 0;
+        //int earthBonus => Race != null ? Race.StatBonusBonus<EarthStat>() : 0;
+        //int windBonus => Race != null ? Race.StatBonusBonus<WindStat>() : 0;
+
+        //int chaosBonus => Race != null ? Race.StatBonusBonus<ChaosStat>() : 0;
+        //int orderBonus => Race != null ? Race.StatBonusBonus<Orderstat>() : 0;
+        //int lightBonus => Race != null ? Race.StatBonusBonus<LightStat>() : 0;
+        //int darkBonus => Race != null ? Race.StatBonusBonus<DarkStat>() : 0;
 
 
-        int fire; /*vs*/ int water => 10 - fire;
-        int chaos; /*vs*/ int order => 10 - chaos;
-        int earth; /*vs*/ int wind => 10 - earth;
-        int dark;  /*vs*/ int light => 10 - dark;
+        //int fire; /*vs*/ int water => 10 - fire;
+        //int chaos; /*vs*/ int order => 10 - chaos;
+        //int earth; /*vs*/ int wind => 10 - earth;
+        //int dark;  /*vs*/ int light => 10 - dark;
 
+
+        private void CalculateStats() {
+            //if (player.Gender == Gender.Male) {
+            //    player.Strenght.MaxBase = ((player.Fire.Max  + player.Earth.Max) / 2) + 3;
+            //} else {
+            //    player.Strenght.MaxBase = ((player.Fire.Max + player.Earth.Max) / 2 );  //females are a tiny bit weaker initially
+            //}
+
+            //if (player.Gender == Gender.Female) {
+            //    player.Dexterity.MaxBase = ((player.Water.Max) / 2) + 1; // females slight more dexterious
+            //} else {
+            //    player.Dexterity.MaxBase = ((player.Water.Max) / 2);  
+            //}
+
+            //player.Agility.MaxBase = player.Wind.MaxBase;
+
+
+        }
 
         //if null -> 0  if male -> 3 if female 0
-        int genderStrenghtBonus => CharacterGender.HasValue ? CharacterGender.Value == Gender.Male ? 3 : 0 : 0;
-        int strenght => (fire + fireBonus + earth + earthBonus) / 2 + genderStrenghtBonus;
+        // int genderStrenghtBonus => player.Gender.HasValue ? CharacterGender.Value == Gender.Male ? 3 : 0 : 0;
+        //  int strenght => (fire + fireBonus + earth + earthBonus) / 2 + genderStrenghtBonus;
 
         //bonus 1 for dex for females
-        int genderDexterityBonus => CharacterGender.HasValue ? CharacterGender.Value == Gender.Male ? 0 : 1 : 0;
-        int dexterity => water + waterBonus + genderDexterityBonus;
+        // int genderDexterityBonus => CharacterGender.HasValue ? CharacterGender.Value == Gender.Male ? 0 : 1 : 0;
+        //  int dexterity => water + waterBonus + genderDexterityBonus;
 
-        int agility => wind + windBonus;
-        int speed => agility + strenght;
+        //int agility => wind + windBonus;
+        //int speed => agility + strenght;
 
-        //bonus 2 cons for females 
-        int genderConsitutionBonus => CharacterGender.HasValue ? CharacterGender.Value == Gender.Male ? 0 : 2 : 0;
-        int constitution => earth + earthBonus + +genderConsitutionBonus;
+        ////bonus 2 cons for females 
+        //int genderConsit2utionBonus => CharacterGender.HasValue ? CharacterGender.Value == Gender.Male ? 0 : 2 : 0;
+        //int constitution => earth + earthBonus + +genderConsitutionBonus;
 
-        int Stealth => (dark + darkBonus + agility) / 2;
-        int awarness => ((light + lightBonus + wind + windBonus) / 2) + 3;
+        //int Stealth => (dark + darkBonus + agility) / 2;
+        //int awarness => ((light + lightBonus + wind + windBonus) / 2) + 3;
 
-        //may end up using this for summons
-        int demonicAlignment => (earth + earthBonus + dark + darkBonus + fire + fireBonus + chaos + chaosBonus) / 4;
-        int angelicAlignment => (order + orderBonus + water + waterBonus + light + lightBonus + wind + windBonus) / 4;
-        int NaturalAlignment => (fire + fireBonus + chaos + chaosBonus + wind + windBonus + light + lightBonus) / 4;
-        int TechnologicalAlignment => (dark + darkBonus + earth + earthBonus + order + orderBonus + water + waterBonus) / 4;
-
-
-        int healthClassBonus => Class != null ? Class.StatBonusBonus<HealthPointsStat>() : 0;
-
-        int HealthPoint => 15 + (constitution * 5) - chaos + chaosBonus + healthClassBonus;
-
-        int stamina => (strenght + constitution) * 2;
-
-        private void renderStatsBox(){
-       
-
-            DialogHelper.WriteDialog(ConsoleColor.Red, ConsoleColor.Black, 70, 20, 50,
-            $"Strenght:{strenght}   Dexterity:{dexterity}",
-            $"Agility:{agility}   Speed:{speed}",
-            $"Consitution:{constitution}",
-            $"Stealth:{Stealth}   Awarness:{awarness}",
-            $"Hittpoints:{HealthPoint} Stamina{stamina}",
-            "",
-            "Summons Affinity",
-            $"Demonic:{demonicAlignment}   Angelic:{angelicAlignment}",
-            $"Natural:{NaturalAlignment}   Techological:{TechnologicalAlignment}",
-            "",
-           "Elemental",
-           $"Fire:{fire + fireBonus}   Water:{water + waterBonus}",
-           $"Earth:{earth +earthBonus}   Wind:{wind + windBonus}",
-           $"Chaos:{chaos +chaosBonus}   Order:{order + orderBonus}",
-           $"Dark:{dark + darkBonus}   Light:{light + lightBonus}"
+        ////may end up using this for summons
+        //int demonicAlignment => (earth + earthBonus + dark + darkBonus + fire + fireBonus + chaos + chaosBonus) / 4;
+        //int angelicAlignment => (order + orderBonus + water + waterBonus + light + lightBonus + wind + windBonus) / 4;
+        //int NaturalAlignment => (fire + fireBonus + chaos + chaosBonus + wind + windBonus + light + lightBonus) / 4;
+        //int TechnologicalAlignment => (dark + darkBonus + earth + earthBonus + order + orderBonus + water + waterBonus) / 4;
 
 
-                );
+        //int healthClassBonus => Class != null ? Class.StatBonusBonus<HealthPointsStat>() : 0;
+
+        //int HealthPoint => 15 + (constitution * 5) - chaos + chaosBonus + healthClassBonus;
+
+        //int stamina => (strenght + constitution) * 2;
+
+        private void renderStatsBox() {
+
+            if (player != null) {
+                DialogHelper.WriteDialog(ConsoleColor.Red, ConsoleColor.Black, 70, 20, 50,
+                $"Strenght:{player.Strenght.Max}   Dexterity:{player.Dexterity.Max}",
+                $"Agility:{player.Agility.Max}   Speed:{player.Speed.Max}",
+                $"Consitution:{player.Constitution.Max}",
+                $"Stealth:{player.Stealth.Max}   Awarness:{player.Awareness.Max}",
+                $"Hittpoints:{player.HP.Max} Stamina{player.Stamina.Max}",
+                "",
+                //   "Summons Affinity",
+                //   $"Demonic:{demonicAlignment}   Angelic:{angelicAlignment}",
+                //   $"Natural:{NaturalAlignment}   Techological:{TechnologicalAlignment}",
+                "",
+               "Elemental",
+               $"Fire:{player.Fire.Max}   Water:{player.Water.Max}",
+               $"Earth:{player.Earth.Max}   Wind:{player.Wind.Max}",
+               $"Chaos:{player.Chaos.Max}   Order:{player.Order.Max}",
+               $"Dark:{player.Darkness.Max}   Light:{player.Light.Max}"
+
+
+                    );
+            }
         }
 
 
@@ -106,46 +133,45 @@ namespace SakuraBlue.GameState.Menu {
             result[value] = '▓';
 
             return $"{start} {string.Join("", result)} {end}";
-           
+
         }
         public override List<string> GetOptions() {
-            return new List<string> {  $"Select Name: {Name}",
-            $"Select Gender:{CharacterGender}",
-            $"Select Race: {Race?.Name}",
-            $"Select Class: {Class?.Name}",
-            Slider(fire,"Fire","Water"),
-            Slider(chaos,"Chaos","Order"),
-            Slider(earth,"Earth","Wind "),
-            Slider(dark,"Dark","Light"),
+            return new List<string> {  $"Select Name: {player.Name}",
+            $"Select Gender:{player.Gender}",
+            $"Select Race: {player.Race?.Name}",
+            $"Select Class: {player.Class?.Name}",
+            Slider(player.Fire.MaxBase,"Fire","Water"),
+            Slider(player.Chaos.MaxBase,"Chaos","Order"),
+            Slider(player.Earth.MaxBase,"Earth","Wind "),
+            Slider(player.Darkness.MaxBase,"Dark","Light"),
             "Begin",
               "Back" };
         }
 
- 
+
         //  '▓', musicVolume).PadRight(10, '░'
         public override void Action() {
-     
+
 
 
             switch (Selected) {
                 case 0:
-                   // ConsoleHelper.Write("TypeName:", ConsoleColor.Red);
+                    // ConsoleHelper.Write("TypeName:", ConsoleColor.Red);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.SetCursorPosition(18, 19);
-                    if (Name != null)
-                    {
-                        ConsoleHelper.Write("".PadRight(Name.Length, 'X'), ConsoleColor.Black, ConsoleColor.Black);
+                    if (player.Name != null) {
+                        ConsoleHelper.Write("".PadRight(player.Name.Length, 'X'), ConsoleColor.Black, ConsoleColor.Black);
                         Console.SetCursorPosition(18, 19);
                     }
                     Console.CursorVisible = true;
-                        Name = Console.ReadLine();
+                    player.Name = Console.ReadLine();
                     Console.CursorVisible = false;
                     Console.CursorTop--;
                     Console.CursorLeft = 0;
                     ConsoleHelper.Write("XXXXXXxxxxxxxxxxxxxxxxXXXXXX", ConsoleColor.Black, ConsoleColor.Black);
 
                     RedrawNext();
-               
+
                     break;
 
                 case 1:
@@ -169,9 +195,8 @@ namespace SakuraBlue.GameState.Menu {
 
                     Console.Clear();
                     Program.currentState.RunInitiate();//.RedrawNext();
-                
-                    break;
 
+                    break;
 
                 case 4:
                     //fire
@@ -186,13 +211,9 @@ namespace SakuraBlue.GameState.Menu {
                     //fire
                     break;
 
-
-
-
-
                 case 8:
-                   
-                    if (this.Name != null && this.Race != null && this.CharacterGender != null && this.Class != null) {
+
+                    if (player.Name != null && player.Race != null && player.Gender != null && player.Class != null) {
                         Exit();
                         Console.Clear();
 
@@ -200,63 +221,38 @@ namespace SakuraBlue.GameState.Menu {
                         Program.currentState.RunInitiate();
                         var game = ((GameState.Map)Program.currentState);
 
-                        var player = PlayerInstanceManager.GetPlayer(game.map) as NPCBase;
-                        player.Class = Class;
-                        player.Name = Name;
-                        player.Race = Race;
-                        player.Gender = CharacterGender.Value;
-                        player.Inventory.AddRange(Class.StartingGear);
+                        player.Inventory.AddRange(player.Class.StartingGear);
 
+                        player.Water.MaxBase = 10 - player.Water.MaxBase;
+                        player.Wind.MaxBase = 10 - player.Earth.MaxBase;
 
-                        player.Awareness.MaxBase = awarness;
-                        player.Strenght.MaxBase = strenght;
-
-
-                        player.Strenght.Current = strenght;
-                        player.HP.Current = healthClassBonus;
-                        player.constitution.Current = constitution;
-                        //   player.Stamina.Current = 
-                        player.Awareness.Current = awarness;
-                        player.Stealth.Current = Stealth;
-                        player.Fire.Current = fire;
-                        player.Water.Current = water;
-                        player.Wind.Current = wind;
-                        player.Earth.Current = earth;
-                        player.Chaos.Current = chaos;
-                        player.Order.Current = order;
-                        player.Light.Current = light;
-                        player.Darkness.Current = dark;
-
-
+                        player.Order.MaxBase = 10 - player.Chaos.MaxBase;
+                        player.Light.MaxBase = 10 - player.Darkness.MaxBase;
 
                         player.ArmStarterGear();
-
-
-
-
                         Program.currentState.RedrawNext();
                     } else {
                         Console.Clear();
                         ConsoleHelper.WTF_WriteLine("NOPE!");
                         ConsoleHelper.WriteLine("Finish your character build!!!");
                         Console.Read();
-                    
+
                         RedrawNext();
                     }
                     break;
                 case 9:
 
-                    Back();                
+                    Back();
 
                     break;
 
             }
-           
+
 
 
         }
 
-       
+
         /// <summary>
         /// Rendering helper for slider... may never be called outside render block!!! dispbedience will be punished with firey doom!
         /// </summary>
@@ -270,40 +266,40 @@ namespace SakuraBlue.GameState.Menu {
         }
 
         bool renderFireSliderFlag = false;
-        void renderFireSlider() { RerenderSlider(fire, "Fire", "Water", 23); renderFireSliderFlag = false; }
+        void renderFireSlider() { RerenderSlider(player.Fire.MaxBase, "Fire", "Water", 23); renderFireSliderFlag = false; }
 
         bool RenderChaosSliderFlag = false;
-        void RenderChaosSlider() { RerenderSlider(chaos, "Chaos", "Order", 24); RenderChaosSliderFlag = false; }
+        void RenderChaosSlider() { RerenderSlider(player.Chaos.MaxBase, "Chaos", "Order", 24); RenderChaosSliderFlag = false; }
 
         bool RenderEarthSliderFlag = false;
-        void RenderEarthSlider() { RerenderSlider(chaos, "Earth", "Wind", 25); RenderEarthSliderFlag = false; }
+        void RenderEarthSlider() { RerenderSlider(player.Earth.MaxBase, "Earth", "Wind", 25); RenderEarthSliderFlag = false; }
 
         bool RenderDarkSliderFlag = false;
-        void RenderDarkSlider() { RerenderSlider(chaos, "Dark", "Light", 26); RenderDarkSliderFlag = false; }
+        void RenderDarkSlider() { RerenderSlider(player.Darkness.MaxBase, "Dark", "Light", 26); RenderDarkSliderFlag = false; }
 
         protected override void Decrement() {
             switch (Selected) {
                 case 4:
-                    if (fire > 0) {
-                        fire--;
+                    if (player.Fire.MaxBase > 0) {
+                        player.Fire.MaxBase--;
                         renderFireSliderFlag = true;
                     }
                     break;
                 case 5:
-                    if (chaos > 0) {
-                        chaos--;
+                    if (player.Chaos.MaxBase > 0) {
+                        player.Chaos.MaxBase--;
                         RenderChaosSliderFlag = true;
                     }
                     break;
                 case 6:
-                    if (earth > 0) {
-                        earth--;
+                    if (player.Earth.MaxBase > 0) {
+                        player.Earth.MaxBase--;
                         RenderEarthSliderFlag = true;
                     }
                     break;
                 case 7:
-                    if (dark > 0) {
-                        dark--;
+                    if (player.Darkness.MaxBase > 0) {
+                        player.Darkness.MaxBase--;
                         RenderDarkSliderFlag = true;
                     }
                     break;
@@ -311,31 +307,31 @@ namespace SakuraBlue.GameState.Menu {
             RedrawNext();
         }
 
-   
+
 
         protected override void Increment() {
             switch (Selected) {
                 case 4:
-                    if (fire < 9) {
-                        fire++;
+                    if (player.Fire.MaxBase < 9) {
+                        player.Fire.MaxBase++;
                         renderFireSliderFlag = true;
                     }
                     break;
                 case 5:
-                    if (chaos < 9) {
-                        chaos++;
+                    if (player.Chaos.MaxBase < 9) {
+                        player.Chaos.MaxBase++;
                         RenderChaosSliderFlag = true;
                     }
                     break;
                 case 6:
-                    if (earth < 9) {
-                        earth++;
+                    if (player.Earth.MaxBase < 9) {
+                        player.Earth.MaxBase++;
                         RenderEarthSliderFlag = true;
                     }
                     break;
                 case 7:
-                    if (dark < 9) {
-                        dark++;
+                    if (player.Darkness.MaxBase < 9) {
+                        player.Darkness.MaxBase++;
                         RenderDarkSliderFlag = true;
                     }
                     break;
@@ -344,16 +340,14 @@ namespace SakuraBlue.GameState.Menu {
         }
 
 
-        protected override void Back()
-        {
+        protected override void Back() {
             Program.currentState = Singleton<TopMenu>.GetInstance();
             Console.Clear();
             bigTextRendered = false;
             Program.currentState.RedrawNext();
         }
 
-        public override void Exit()
-        {
+        public override void Exit() {
             bigTextRendered = false;
             base.Exit();
         }
@@ -386,9 +380,8 @@ namespace SakuraBlue.GameState.Menu {
                 renderStatsBox();
             }
 
-            if (!bigTextRendered)
-            {
-               
+            if (!bigTextRendered) {
+
                 ConsoleHelper.AltClear();
                 ConsoleHelper.WTF_WriteLine(Program.GameTitle);
                 bigTextRendered = true;
@@ -397,21 +390,35 @@ namespace SakuraBlue.GameState.Menu {
 
                 ConsoleHelper.WriteLine("CharacterCreation Options", ConsoleColor.Cyan);
                 renderStatsBox();
-            }
-            else {
+            } else {
                 Console.SetCursorPosition(0, 19);
             }
 
-            
+
             base.Render();
-         
+
         }
 
+        Player player => playerAsBase as Player;
+        AgentBase playerAsBase;
 
 
+        public AgentBase GetPlayer() {
+            return playerAsBase;
+        }
 
+        public T AddAgent<T>(params object[] parameters) where T : AgentBase {
+            List<object> parameterList = new List<object>();
+            parameterList.Add(this);
+            parameterList.AddRange(parameters);
 
+            playerAsBase = Activator.CreateInstance(typeof(T), parameterList.ToArray()) as T;
+            return (T)playerAsBase;
+        }
 
+        public void Addplayer(AgentBase player) {
+            this.playerAsBase = player;
+        }
     }
 
 
