@@ -16,11 +16,13 @@ namespace SakuraBlue.GameState.Menu
             LockToken.Enforce<Options>(token);
         }
         public int selected = 0;
+        const string textToSpeechLabel = "Voice Volume: ";
         const string musicVolumeLabel = "Music volume: ";
         const string soundVolumeLabel = "Sound volume: ";
         public int musicVolume = 7;
         public int soundVolume = 10;
-        private string[] options = new string[] { musicVolumeLabel, soundVolumeLabel, "Back" };
+        public int speechVolume = 0;
+        private string[] options = new string[] { musicVolumeLabel, soundVolumeLabel, textToSpeechLabel, "Back" };
 
         KeyInterface keyInterface;
         protected override void Initiate()
@@ -39,7 +41,14 @@ namespace SakuraBlue.GameState.Menu
                 }),
                 new KeyHook(ConsoleKey.LeftArrow, () =>
                 {
-                    if (options[selected] == musicVolumeLabel)
+                    if (options[selected] == textToSpeechLabel) {
+                        speechVolume--;
+                        if (speechVolume < 0) {
+                            speechVolume = 0;
+                        }
+                        RedrawNext();
+                    } else
+               if (options[selected] == musicVolumeLabel)
                     {
                         musicVolume--;
                         if (musicVolume < 0)
@@ -47,7 +56,7 @@ namespace SakuraBlue.GameState.Menu
                             musicVolume = 0;
                         }
                         RedrawNext();
-                    }
+                    }else
                     if (options[selected] == soundVolumeLabel)
                     {
                         soundVolume--;
@@ -60,7 +69,15 @@ namespace SakuraBlue.GameState.Menu
                 }),
                 new KeyHook(ConsoleKey.RightArrow, () =>
                 {
-                    if (options[selected] == musicVolumeLabel)
+
+                    if (options[selected] == textToSpeechLabel) {
+                        speechVolume++;
+                        if (speechVolume > 10) {
+                            speechVolume = 10;
+                        }
+                        RedrawNext(); ;
+                    } else
+        if (options[selected] == musicVolumeLabel)
                     {
                         musicVolume++;
                         if (musicVolume > 10)
@@ -68,7 +85,7 @@ namespace SakuraBlue.GameState.Menu
                             musicVolume = 10;
                         }
                         RedrawNext();
-                    }
+                    }else
                     if (options[selected] == soundVolumeLabel)
                     {
                         soundVolume++;
@@ -157,6 +174,11 @@ namespace SakuraBlue.GameState.Menu
                 if (option == soundVolumeLabel)
                 {
                     var gauge = new string('▓', soundVolume).PadRight(10, '░');
+                    ConsoleHelper.Write(gauge, ConsoleColor.Red, ConsoleColor.Black);
+                }
+
+                if (option == textToSpeechLabel) {
+                    var gauge = new string('▓', speechVolume).PadRight(10, '░');
                     ConsoleHelper.Write(gauge, ConsoleColor.Red, ConsoleColor.Black);
                 }
 

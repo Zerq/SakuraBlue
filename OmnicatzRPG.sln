@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessDenied", "Lock\AccessDenied.csproj", "{F827E093-AB87-4493-AA82-8D084BC879C2}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakuraBlueAbstractAndBase", "SakuraBlueAbstractAndBase\SakuraBlueAbstractAndBase.csproj", "{05A1766C-AB2D-467F-A7E2-8E35C1A46D7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omnicatz.Helper", "Omnicatz.Helper\Omnicatz.Helper.csproj", "{2C50E7F0-5827-45F8-87CA-49D55191C87D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "speechTest", "speechTest\speechTest.csproj", "{68DB723F-340C-48E8-AD5F-288929D5CAA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{2C50E7F0-5827-45F8-87CA-49D55191C87D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C50E7F0-5827-45F8-87CA-49D55191C87D}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C50E7F0-5827-45F8-87CA-49D55191C87D}.Release|x86.Build.0 = Release|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Debug|x86.Build.0 = Debug|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{68DB723F-340C-48E8-AD5F-288929D5CAA4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
