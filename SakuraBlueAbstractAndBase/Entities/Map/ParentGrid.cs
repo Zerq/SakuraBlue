@@ -8,6 +8,8 @@ using System.Linq;
 using Omnicatz.Engine.Entities;
 using System.Reflection;
 using SakuraBlueAbstractAndBase.Entities.Map;
+using SakuraBlueAbstractAndBase.ScriptEngine;
+using System.IO;
 
 namespace SakuraBlue.Entities.Map
 {
@@ -34,6 +36,25 @@ namespace SakuraBlue.Entities.Map
             }
 
         }
+        public ParentGrid(string path, Assembly assembly) :this(path, GetPallet(AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(n => n.ManifestModule.Name == "SakuraBlueAssets.dll"))){
+
+
+        }
+
+        public static ParentGrid LoadMap(string ScriptPath) {
+          var engine =  Singleton<ScriptEngine>.GetInstance();
+          
+
+            engine.Clear();//destroy old one
+            ParentGrid result = null;
+            engine.AddHostType(typeof(ParentGrid).Name, typeof(ParentGrid));
+            engine.AddHostObject("Map", result);
+
+          var scriptFileContent= File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}{ScriptPath}");
+            //  engin.Execute(engin);
+            return null;
+        }
+
         protected static bool NonAlphaColorCompare(Color referenceColor, Color color)
         {
             return referenceColor.R == color.R && referenceColor.G == color.G && referenceColor.B == color.B;
