@@ -12,19 +12,20 @@ namespace SakuraBlue.GameState {
 
 
         public ParentGrid map;
-
-        DateTime last = DateTime.Now;
-        //wire up ui Event
+        KeyInterface keyInterface;
         int fps = 30;
         int fpsFracton => 1000 / fps;
         string desciription = "";
+        DateTime last = DateTime.Now;
+        private bool redrawCharacterInfo = true;
+        bool isDay = true;
 
 
         public Map(LockToken token) : base(token) {
 
         }
 
-        KeyInterface keyInterface;
+ 
 
 
 
@@ -62,10 +63,8 @@ namespace SakuraBlue.GameState {
 
         }
 
-        private bool redrawCharacterInfo = true;
 
-
-        bool isDay = true;
+     
 
         protected override void Render() {
             var player = PlayerInstanceManager.GetPlayer(map) as NPCBase;
