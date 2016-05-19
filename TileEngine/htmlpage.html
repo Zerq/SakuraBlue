@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script src="list.js"></script>
+    <script id="Map" type="application/json" src="maptest..json">maptest.json</script>
+  <style>
+      body {
+      overflow:hidden;
+           }
+
+  </style>
+
+<script type="text/javascript">
+
+
+    function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+
+            // Check if the XMLHttpRequest object has a "withCredentials" property.
+            // "withCredentials" only exists on XMLHTTPRequest2 objects.
+            xhr.open(method, url, true);
+
+        } else if (typeof XDomainRequest != "undefined") {
+
+            // Otherwise, check if XDomainRequest.
+            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+
+        } else {
+
+            // Otherwise, CORS is not supported by the browser.
+            xhr = null;
+
+        }
+        return xhr;
+    }
+
+ 
+
+
+    function MapHelper() { }
+    MapHelper.Render = function (map, renderX, renderY, renderWidth, renderHeight, ctx, tileSetImage, xNudge, yNudge) {
+        for (var lcount = 0; lcount < map.layers.length; lcount++) {  //
+            var layer = map.layers[lcount];
+
+            for (var y = renderY; y < Math.min(map.height, renderHeight) + renderY  ; y++) {
+                for (var x = renderX; x < Math.min(map.width, renderWidth) + renderX ; x++) {
+
+                    var tile = layer.data[(y * map.width) + x];
+                    var tx = Math.round(map.tilesets[0].imagewidth / map.tilesets[0].tilewidth);
+                    var ty = Math.round(map.tilesets[0].imageheight / map.tilesets[0].tileheight);
+
+                    xtile = (tile % tx) - 1;    // % is the "modulo operator", the remainder of i / width;
+                    ytile = Math.floor(tile / ty);
+
+                    ctx.drawImage(
+                    tileSetImage,
+                    xtile * map.tilesets[0].tilewidth,  //source x
+                    ytile * map.tilesets[0].tileheight, //source y
+                    map.tilesets[0].tilewidth,      //source width
+                    map.tilesets[0].tileheight,     //source hight
+                    (x * map.tilesets[0].tilewidth) + xNudge - (renderX * map.tilesets[0].tilewidth),
+                    (y * map.tilesets[0].tileheight) + yNudge - (renderY * map.tilesets[0].tileheight),
+                    map.tilesets[0].tilewidth,
+                    map.tilesets[0].tileheight
+                    );
+                }
+            }
+        };
+    }
+ 
+
+    window.onload = function () {
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("tiles");
+        var x = 0;
+        var y = 0;
+        onkeypress = function (event) {
+            if (event.keyCode == 38) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 40) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 39) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 37) {
+                event.preventDefault();
+            }
+        };
+        onkeydown = function (event) {
+            if (event.keyCode == 38) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 40) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 39) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 37) {
+                event.preventDefault();
+            }
+        };
+        onkeyup = function (event) {
+            if (event.keyCode == 38) {
+                y--;
+                event.preventDefault();
+            }
+            if (event.keyCode == 40) {
+                y++;
+                event.preventDefault();
+            }
+            if (event.keyCode == 39) {
+                x++;
+                event.preventDefault();
+            }
+            if (event.keyCode == 37) {
+                x--;
+                event.preventDefault();
+            } 
+        };
+       var requst=  createCORSRequest("GET", "untitlecd.json");
+       requst.onload = function () {
+           var map = JSON.parse(requst.responseText);
+           setInterval(function () {
+               ctx.clearRect(0, 0, c.width, c.height);
+               MapHelper.Render(map, 0, 0, 6, 6, ctx, img, 0, 0);
+               MapHelper.Render(map, 3, 0, 6, 6, ctx, img, x, 6 * 32 + y);
+               MapHelper.Render(map, 0, 0, 16, 16, ctx, img, x, 6 * 32 + y);
+           }, 1000 / 30);
+       };
+       requst.send();
+   
+    };
+</script>
+</head>
+<body>
+    <img style="display:none;" id="tiles" src="Castle.png" />
+    <canvas id="myCanvas" width="3000" height="3000">
+        
+    </canvas>
+</body>
+</html>
