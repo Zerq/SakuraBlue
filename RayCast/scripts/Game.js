@@ -118,7 +118,7 @@ var RayCastResult = (function () {
     });
     return RayCastResult;
 }());
-function RayCast(angle, posX, posY, step, MaxStep, map, tileset, tileWidth, tileHeight) {
+function RayCast(angle, posX, posY, step, maxStep, map, tileset, tileWidth, tileHeight) {
     var newAngle = thingy() * ((angle + 180) % 360);
     var sin = Math.sin(newAngle);
     var cos = Math.cos(newAngle);
@@ -133,12 +133,12 @@ function RayCast(angle, posX, posY, step, MaxStep, map, tileset, tileWidth, tile
     }
     else {
         //ok this was just an empty cell move onwards!
-        var result = RayCast(angle, newX, newY, step + 1, MaxStep, map, tileset, tileWidth, tileHeight);
+        var result = RayCast(angle, newX, newY, step + 1, maxStep, map, tileset, tileWidth, tileHeight);
         if (result instanceof RayCastResult) {
             return result; // yay we got our final result! Perfect!
         }
         if (result instanceof Tile) {
-            if (!result) {
+            if (result === null) {
                 return null;
             }
             var x = newX % 1; //I just want the face on the hypotetical square so i can determin directionality of he texture...
@@ -162,7 +162,7 @@ function RayCast(angle, posX, posY, step, MaxStep, map, tileset, tileWidth, tile
                 }
             }
         }
-        if (step + 1 === MaxStep) {
+        if (maxStep === step + 1) {
             return null; //FUCK IT I GIVE UP! this ray timed out!
         }
     }
@@ -188,7 +188,7 @@ var Game = (function () {
         for (var y = 0; y < width; y++) {
             for (var x = 0; x < width; x++) {
                 var color = this.GetColor(x, y, this.ctxMap);
-                var tile = this.tileset.find(function (n) { return n.Color == color; });
+                var tile = Game.Find(this.tileset, function (n) { return n.Color == color; });
                 switch (tile.Type) {
                     case TileType.Normal:
                         this.map.Set(x, y, tile.Id);
@@ -260,11 +260,24 @@ var Game = (function () {
         ctx['msImageSmoothingEnabled'] = false; /* IE */
         return ctx;
     };
+    Game.Find = function (list, func) {
+        if (Array.prototype["find"] !== undefined) {
+            Array.prototype["find"].Call(list, func); //hopefully do something vaguely polyfill like...
+        }
+        else {
+            list.forEach(function (item) {
+                if (func(item)) {
+                    return item;
+                }
+            });
+            return null;
+        }
+    };
     Game.prototype.DrawMap = function () {
         var _this = this;
         this.ctx.clearRect(0, 0, this.Width * this.tileHeight, this.Height * this.tileHeight);
         this.map.Traverse(function (tileRef, x, y) {
-            var tile = _this.tileset.find(function (m) { return m.Id === tileRef; });
+            var tile = Game.Find(_this.tileset, function (m) { return m.Id === tileRef; });
             if (tile.Type === TileType.Normal) {
                 _this.ctx.drawImage(_this.bitmap, tile.X, tile.Y, _this.tileWidth, _this.tileHeight, x * _this.tileWidth, y * _this.tileHeight, _this.tileWidth, _this.tileHeight);
             }
@@ -275,9 +288,10 @@ var Game = (function () {
         var cosAOV1 = Math.cos(thingy() * -((this.Player.Rotation + 90 - (this.Player.AngleOfView / 2))) % 360) * this.tileHeight * 10;
         var sinAOV2 = Math.sin(thingy() * -((this.Player.Rotation + 90 + (this.Player.AngleOfView / 2))) % 360) * this.tileHeight * 10;
         var cosAOV2 = Math.cos(thingy() * -((this.Player.Rotation + 90 + (this.Player.AngleOfView / 2))) % 360) * this.tileHeight * 10;
-        var slice = this.Player.AngleOfView / 300;
+        var renderArea = 500;
+        var slice = this.Player.AngleOfView / renderArea;
         this.ctxfake3d.clearRect(0, 0, this.ctxfake3d.canvas.width, this.ctxfake3d.canvas.height);
-        for (var i = 0; i < 300; i++) {
+        for (var i = 0; i < renderArea; i++) {
             var result = RayCast(this.Player.Rotation - (this.Player.AngleOfView / 2) + (i * slice), this.Player.X / this.tileWidth, this.Player.Y / this.tileHeight, 0, 25, this.map, this.tileset, this.tileWidth, this.tileHeight);
             //  result.Tile.
             if (result !== undefined) {
@@ -419,3 +433,4 @@ window.addEventListener("load", function () {
     ], 32, 32);
     game.DrawMap();
 });
+//# sourceMappingURL=Game.js.map

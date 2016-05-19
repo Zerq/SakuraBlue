@@ -1,7 +1,7 @@
-﻿
-class Grid {
+﻿class Grid {
     private ary: number[][];
     public Get(x: number, y: number): number {
+     
         if (this.ary[x] !== undefined) {
             if (this.ary[x][y] !== undefined) {
                 return this.ary[x][y];
@@ -109,7 +109,7 @@ class RayCastResult {
         this.rayLenght = rayLenght;
     }
 }
-function RayCast(angle: number, posX: number, posY: number, step: number, MaxStep: number, map: Grid, tileset: Array<Tile>, tileWidth: number, tileHeight: number): any {
+function RayCast(angle: number, posX: number, posY: number, step: number, maxStep: number, map: Grid, tileset: Array<Tile>, tileWidth: number, tileHeight: number): any {
     var newAngle = thingy() * ((angle + 180) % 360); 
     var sin = Math.sin(newAngle);
     var cos = Math.cos(newAngle);
@@ -125,7 +125,7 @@ function RayCast(angle: number, posX: number, posY: number, step: number, MaxSte
 //this will not be the final result which should be a raycastResult....
     } else {
     //ok this was just an empty cell move onwards!
-        var result = RayCast(angle, newX, newY, step + 1, MaxStep, map, tileset, tileWidth, tileHeight);
+        var result = RayCast(angle, newX, newY, step + 1, maxStep, map, tileset, tileWidth, tileHeight);
         
         if (result instanceof RayCastResult) {
             return result; // yay we got our final result! Perfect!
@@ -133,7 +133,7 @@ function RayCast(angle: number, posX: number, posY: number, step: number, MaxSte
   
         if (result instanceof Tile) {
 
-            if (!result) {
+            if (result === null) {
                 return null;
             }
 
@@ -162,7 +162,8 @@ function RayCast(angle: number, posX: number, posY: number, step: number, MaxSte
 
                
         }
-        if (step + 1 === MaxStep) {
+   
+        if (maxStep === step + 1) {
             return null; //FUCK IT I GIVE UP! this ray timed out!
             //this is to cover the case of an map without walls where you can just stair out into infinity...
         }
@@ -220,7 +221,23 @@ class Game {
         ctx['webkitImageSmoothingEnabled'] = false; /* Safari */
         ctx['msImageSmoothingEnabled'] = false;     /* IE */
         return ctx;
-    }    
+    }
+    public static Find(list: Array<Tile>, func: (tile: Tile) => boolean): Tile {
+        if (Array.prototype["find"] !== undefined) {
+            Array.prototype["find"].Call(list, func); //hopefully do something vaguely polyfill like...
+        } else {
+
+            list.forEach(function (item) {
+                if (func(item)) {
+                    return item;
+                }
+
+            });
+            return null;
+
+        }
+    } 
+
 
     public constructor(xPos: number, yPos: number, width: number, height: number, tileset: Tile[], tileWidth, tileHeight) {
         this.tileWidth = tileWidth;
@@ -246,8 +263,9 @@ class Game {
             for (var x = 0; x < width; x++) {
                 var color = this.GetColor(x, y, this.ctxMap);
 
+              
 
-                var tile = this.tileset.find(n => n.Color == color);
+                var tile = Game.Find(this.tileset, n => n.Color == color);
                 switch (tile.Type) {
                     case TileType.Normal:
                         this.map.Set(x, y, tile.Id);
@@ -284,7 +302,7 @@ class Game {
                 this.ctx.clearRect(0, 0, this.Width * this.tileHeight, this.Height * this.tileHeight);
         this.map.Traverse((tileRef, x, y) => {
 
-            var tile: Tile = this.tileset.find(m => m.Id === tileRef);  
+            var tile: Tile = Game.Find(this.tileset,m => m.Id === tileRef);  
             if (tile.Type === TileType.Normal) {
                 this.ctx.drawImage(this.bitmap, tile.X, tile.Y, this.tileWidth, this.tileHeight, x * this.tileWidth, y * this.tileHeight, this.tileWidth, this.tileHeight);
             }
@@ -303,11 +321,15 @@ class Game {
 
         var sinAOV2 = Math.sin(thingy() * -((this.Player.Rotation + 90 + (this.Player.AngleOfView / 2))) % 360) * this.tileHeight*10;
         var cosAOV2 = Math.cos(thingy() * -((this.Player.Rotation + 90 + (this.Player.AngleOfView / 2))) % 360) * this.tileHeight*10;
- 
-        var slice = this.Player.AngleOfView  / 300;
+
+
+
+
+        var renderArea = 500;
+        var slice = this.Player.AngleOfView / renderArea;
 
         this.ctxfake3d.clearRect(0, 0, this.ctxfake3d.canvas.width, this.ctxfake3d.canvas.height);
-        for (var i = 0; i < 300; i++) {
+        for (var i = 0; i < renderArea; i++) {
             var result: RayCastResult = RayCast(this.Player.Rotation - (this.Player.AngleOfView / 2) + (i * slice), this.Player.X / this.tileWidth, this.Player.Y / this.tileHeight, 0, 25, this.map, this.tileset, this.tileWidth, this.tileHeight);
             //  result.Tile.
             if (result !== undefined) {
